@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('nome');
             $table->string('telefone');
             $table->string('email')->nullable();
-            $table->string('empresa');
+            $table->string('empresa')->nullable();
             $table->string('status');
-            $table->string('observacao')->nullable();
+            $table->text('observacao')->nullable();
             $table->timestamps();
         });
     }
