@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lead;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LeadController extends Controller
 {
@@ -22,26 +23,28 @@ class LeadController extends Controller
     public function store(Request $request)
     {
         $dados = $request->validate([
-            'nome' => 'required | string | max: 255',
-            'telefone' => 'required | string | max: 255',
-            'email' => 'nullable | string | email | max: 255',
-            'empresa' => 'nullable | string | max: 255',
+            'nome' => 'required | string | max:255',
+            'telefone' => 'required | string | max:255',
+            'email' => 'nullable | string | email | max:255',
+            'empresa' => 'nullable | string | max:255',
             'status' => ['required', Rule::in([
                 'Novo', 'Contato Realizado', 'Negociação', 'Fechado', 'Perdido',
                 ])],
-            'observacao' => 'nullable | text',
+            'observacao' => 'nullable | string',
         ]);
+
+        $lead = Lead::create($dados);
+
+        return response()->json($lead, 201);
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Lead $lead)
-    {
-        $lead = Lead::create($dados);
-
-        return response()->json($lead, 201);  
-    }
+{
+    return response()->json($lead);
+}
 
     /**
      * Update the specified resource in storage.
