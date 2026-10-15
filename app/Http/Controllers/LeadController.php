@@ -51,7 +51,20 @@ class LeadController extends Controller
      */
     public function update(Request $request, Lead $lead)
     {
-        //
+            $dados = $request->validate([
+            'nome' => 'required|string|max:255',
+            'telefone' => 'required|string|max:255',
+            'email' => 'nullable|string|email|max:255',
+            'empresa' => 'nullable|string|max:255',
+            'status' => ['required', Rule::in([
+                'Novo', 'Contato Realizado', 'Negociação', 'Fechado', 'Perdido',
+            ])],
+            'observacao' => 'nullable|string',
+        ]);
+
+        $lead->update($dados);
+
+        return response()->json($lead);
     }
 
     /**
@@ -59,6 +72,8 @@ class LeadController extends Controller
      */
     public function destroy(Lead $lead)
     {
-        //
+        $lead->delete();
+
+        return response()->noContent();
     }
 }
