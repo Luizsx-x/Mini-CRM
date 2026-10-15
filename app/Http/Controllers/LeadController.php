@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LeadRequest;
 use App\Models\Lead;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class LeadController extends Controller
 {
@@ -20,20 +19,9 @@ class LeadController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LeadRequest $request)
     {
-        $dados = $request->validate([
-            'nome' => 'required | string | max:255',
-            'telefone' => 'required | string | max:255',
-            'email' => 'nullable | string | email | max:255',
-            'empresa' => 'nullable | string | max:255',
-            'status' => ['required', Rule::in([
-                'Novo', 'Contato Realizado', 'Negociação', 'Fechado', 'Perdido',
-                ])],
-            'observacao' => 'nullable | string',
-        ]);
-
-        $lead = Lead::create($dados);
+        $lead = Lead::create($request->validated());
 
         return response()->json($lead, 201);
     }
@@ -49,20 +37,9 @@ class LeadController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Lead $lead)
+    public function update(LeadRequest $request, Lead $lead)
     {
-            $dados = $request->validate([
-            'nome' => 'required|string|max:255',
-            'telefone' => 'required|string|max:255',
-            'email' => 'nullable|string|email|max:255',
-            'empresa' => 'nullable|string|max:255',
-            'status' => ['required', Rule::in([
-                'Novo', 'Contato Realizado', 'Negociação', 'Fechado', 'Perdido',
-            ])],
-            'observacao' => 'nullable|string',
-        ]);
-
-        $lead->update($dados);
+        $lead->update($request->validated());
 
         return response()->json($lead);
     }
