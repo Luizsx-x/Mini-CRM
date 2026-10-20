@@ -40,9 +40,9 @@ class LeadController extends Controller
      * Display the specified resource.
      */
     public function show(Lead $lead)
-{
-    return response()->json($lead);
-}
+    {
+        return response()->json($lead);
+    }
 
     /**
      * Update the specified resource in storage.
