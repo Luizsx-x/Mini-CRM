@@ -9,3 +9,16 @@ async function buscarLeads() {
 
     return await resposta.json();
 }
+
+async function cadastrarLead(dados) {
+    const resposta = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    });
+
+    return resposta;
+}
