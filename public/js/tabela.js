@@ -20,7 +20,7 @@ function montarTabela(leads) {
         linha.appendChild(criarCelula(lead.telefone));
         linha.appendChild(criarCelula(lead.empresa || '-'));
         linha.appendChild(criarCelula(lead.status));
-        
+
         const celulaAcoes = document.createElement('td');
 
         const botaoEditar = document.createElement('button');
@@ -30,6 +30,14 @@ function montarTabela(leads) {
         });
 
         celulaAcoes.appendChild(botaoEditar);
+
+        const botaoExcluir = document.createElement('button');
+        botaoExcluir.textContent = 'Excluir';
+        botaoExcluir.addEventListener('click', function () {
+            removerLead(lead);
+        });
+
+        celulaAcoes.appendChild(botaoExcluir);
         linha.appendChild(celulaAcoes);
 
         tabela.appendChild(linha);

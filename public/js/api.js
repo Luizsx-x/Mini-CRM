@@ -35,3 +35,12 @@ async function atualizarLead(id, dados) {
 
     return resposta;
 }
+
+async function excluirLead(id) {
+    const resposta = await fetch('/api/leads/' + id, {
+        method: 'DELETE',
+        headers: { 'Accept': 'application/json' }
+    });
+
+    return resposta;
+}

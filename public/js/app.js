@@ -50,3 +50,28 @@ const botaoCancelar = document.getElementById('botao-cancelar');
 botaoCancelar.addEventListener('click', function () {
     limparFormulario();
 });
+
+async function removerLead(lead) {
+    const confirmou = confirm('Tem certeza que deseja excluir o lead ' + lead.nome + '?');
+
+    if (!confirmou) {
+        return;
+    }
+
+    try {
+        const resposta = await excluirLead(lead.id);
+
+        if (!resposta.ok) {
+            alert('Erro ao excluir o lead.');
+            return;
+        }
+
+        if (document.getElementById('lead-id').value == lead.id) {
+            limparFormulario();
+        }
+
+        carregarLeads();
+    } catch (erro) {
+        alert('Não foi possível excluir o lead.');
+    }
+}
