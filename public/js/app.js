@@ -18,7 +18,14 @@ formulario.addEventListener('submit', async function (evento) {
     const dados = pegarDadosDoFormulario();
 
     try {
-        const resposta = await cadastrarLead(dados);
+        const id = document.getElementById('lead-id').value;
+        let resposta;
+
+        if (id) {
+            resposta = await atualizarLead(id, dados);
+        } else {
+            resposta = await cadastrarLead(dados);
+        }
 
         if (resposta.status === 422) {
             const resultado = await resposta.json();
@@ -36,4 +43,10 @@ formulario.addEventListener('submit', async function (evento) {
     } catch (erro) {
         alert('Não foi possível salvar o lead.');
     }
+});
+
+const botaoCancelar = document.getElementById('botao-cancelar');
+
+botaoCancelar.addEventListener('click', function () {
+    limparFormulario();
 });

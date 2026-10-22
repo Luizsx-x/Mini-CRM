@@ -7,9 +7,10 @@
 </head>
 <body>
     <h1>Leads</h1>
-    <h2>Novo lead</h2>
+    <h2 id="titulo-formulario">Novo lead</h2>    
 
     <form id="formulario-lead">
+        <input type="hidden" id="lead-id">
         <label for="nome">Nome</label>
         <input type="text" id="nome">
 
@@ -37,6 +38,7 @@
         <div id="mensagem-erro"></div>
 
         <button type="submit">Salvar</button>
+        <button type="button" id="botao-cancelar">Cancelar</button>
     </form>
 
     <table>

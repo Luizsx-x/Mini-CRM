@@ -22,3 +22,16 @@ async function cadastrarLead(dados) {
 
     return resposta;
 }
+
+async function atualizarLead(id, dados) {
+    const resposta = await fetch('/api/leads/' + id, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    });
+
+    return resposta;
+}

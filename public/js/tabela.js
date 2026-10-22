@@ -20,7 +20,17 @@ function montarTabela(leads) {
         linha.appendChild(criarCelula(lead.telefone));
         linha.appendChild(criarCelula(lead.empresa || '-'));
         linha.appendChild(criarCelula(lead.status));
-        linha.appendChild(criarCelula(''));
+        
+        const celulaAcoes = document.createElement('td');
+
+        const botaoEditar = document.createElement('button');
+        botaoEditar.textContent = 'Editar';
+        botaoEditar.addEventListener('click', function () {
+            preencherFormulario(lead);
+        });
+
+        celulaAcoes.appendChild(botaoEditar);
+        linha.appendChild(celulaAcoes);
 
         tabela.appendChild(linha);
     });
