@@ -33,6 +33,7 @@ function montarTabela(leads) {
 
         const botaoExcluir = document.createElement('button');
         botaoExcluir.textContent = 'Excluir';
+        botaoExcluir.className = 'botao-excluir';
         botaoExcluir.addEventListener('click', function () {
             removerLead(lead);
         });
