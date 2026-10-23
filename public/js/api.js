@@ -1,5 +1,7 @@
-async function buscarLeads() {
-    const resposta = await fetch('/api/leads', {
+async function buscarLeads(nome, status) {
+    const url = '/api/leads?nome=' + encodeURIComponent(nome) + '&status=' + encodeURIComponent(status);
+
+    const resposta = await fetch(url, {
         headers: { 'Accept': 'application/json' }
     });
 

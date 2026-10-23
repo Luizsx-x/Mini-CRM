@@ -41,6 +41,21 @@
         <button type="button" id="botao-cancelar">Cancelar</button>
     </form>
 
+    <h2>Leads cadastrados</h2>
+
+    <div id="filtros">
+        <input type="text" id="busca-nome" placeholder="Buscar por nome...">
+
+        <select id="filtro-status">
+            <option value="">Todos os status</option>
+            <option value="Novo">Novo</option>
+            <option value="Contato Realizado">Contato Realizado</option>
+            <option value="Negociação">Negociação</option>
+            <option value="Fechado">Fechado</option>
+            <option value="Perdido">Perdido</option>
+        </select>
+    </div>
+
     <table>
         <thead>
             <tr>

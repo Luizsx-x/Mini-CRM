@@ -1,6 +1,9 @@
 async function carregarLeads() {
+    const nome = document.getElementById('busca-nome').value;
+    const status = document.getElementById('filtro-status').value;
+
     try {
-        const leads = await buscarLeads();
+        const leads = await buscarLeads(nome, status);
         montarTabela(leads);
     } catch (erro) {
         alert('Não foi possível carregar os leads.');
@@ -75,3 +78,16 @@ async function removerLead(lead) {
         alert('Não foi possível excluir o lead.');
     }
 }
+
+const campoBusca = document.getElementById('busca-nome');
+const filtroStatus = document.getElementById('filtro-status');
+let temporizador;
+
+campoBusca.addEventListener('input', function () {
+    clearTimeout(temporizador);
+    temporizador = setTimeout(carregarLeads, 300);
+});
+
+filtroStatus.addEventListener('change', function () {
+    carregarLeads();
+});
