@@ -13,7 +13,7 @@ class LeadController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Lead::query();
+        $query = Lead::with('tags');
 
         if ($request->filled('nome')) {
             $query->where('nome', 'like', '%' . $request->nome . '%');
