@@ -1,5 +1,7 @@
-async function buscarLeads(nome, status) {
-    const url = '/api/leads?nome=' + encodeURIComponent(nome) + '&status=' + encodeURIComponent(status);
+async function buscarLeads(nome, status, tag) {
+    const url = '/api/leads?nome=' + encodeURIComponent(nome)
+        + '&status=' + encodeURIComponent(status)
+        + '&tag=' + encodeURIComponent(tag);
 
     const resposta = await fetch(url, {
         headers: { 'Accept': 'application/json' }
@@ -45,4 +47,16 @@ async function excluirLead(id) {
     });
 
     return resposta;
+}
+
+async function buscarTags() {
+    const resposta = await fetch('/api/tags', {
+        headers: { 'Accept': 'application/json' }
+    });
+
+    if (!resposta.ok) {
+        throw new Error('Erro ao buscar as tags');
+    }
+
+    return await resposta.json();
 }

@@ -86,3 +86,12 @@ td {
 #tabela-leads .botao-excluir {
     color: #c00;
 }
+
+#lista-tags label {
+    display: inline-block;
+    margin-right: 12px;
+}
+
+#lista-tags input {
+    width: auto;
+}

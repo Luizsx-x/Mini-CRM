@@ -1,9 +1,10 @@
 async function carregarLeads() {
     const nome = document.getElementById('busca-nome').value;
     const status = document.getElementById('filtro-status').value;
+    const tag = document.getElementById('filtro-tag').value;
 
     try {
-        const leads = await buscarLeads(nome, status);
+        const leads = await buscarLeads(nome, status, tag);
         montarTabela(leads);
     } catch (erro) {
         alert('Não foi possível carregar os leads.');
@@ -11,6 +12,29 @@ async function carregarLeads() {
 }
 
 carregarLeads();
+
+async function carregarTags() {
+    try {
+        const tags = await buscarTags();
+        montarCheckboxesDeTags(tags);
+        montarFiltroDeTags(tags);
+    } catch (erro) {
+        alert('Não foi possível carregar as tags.');
+    }
+}
+
+function montarFiltroDeTags(tags) {
+    const filtro = document.getElementById('filtro-tag');
+
+    tags.forEach(function (tag) {
+        const opcao = document.createElement('option');
+        opcao.value = tag.id;
+        opcao.textContent = tag.nome;
+        filtro.appendChild(opcao);
+    });
+}
+
+carregarTags();
 
 const formulario = document.getElementById('formulario-lead');
 
@@ -89,5 +113,11 @@ campoBusca.addEventListener('input', function () {
 });
 
 filtroStatus.addEventListener('change', function () {
+    carregarLeads();
+});
+
+const filtroTag = document.getElementById('filtro-tag');
+
+filtroTag.addEventListener('change', function () {
     carregarLeads();
 });

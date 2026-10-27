@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Leads</h1>
-    <h2 id="titulo-formulario">Novo lead</h2>    
+    <h2 id="titulo-formulario">Novo lead</h2>
 
     <form id="formulario-lead">
         <input type="hidden" id="lead-id">
@@ -19,7 +19,7 @@
         <input type="text" id="telefone">
 
         <label for="email">E-mail</label>
-        <input type="text" id="email">
+        <input type="email" id="email">
 
         <label for="empresa">Empresa</label>
         <input type="text" id="empresa">
@@ -32,6 +32,9 @@
             <option value="Fechado">Fechado</option>
             <option value="Perdido">Perdido</option>
         </select>
+
+        <label>Tags</label>
+        <div id="lista-tags"></div>
 
         <label for="observacao">Observação</label>
         <textarea id="observacao"></textarea>
@@ -55,6 +58,10 @@
             <option value="Fechado">Fechado</option>
             <option value="Perdido">Perdido</option>
         </select>
+
+        <select id="filtro-tag">
+            <option value="">Todas as tags</option>
+        </select>
     </div>
 
     <table>
@@ -64,6 +71,7 @@
                 <th>Telefone</th>
                 <th>Empresa</th>
                 <th>Status</th>
+                <th>Tags</th>
                 <th>Ações</th>
             </tr>
         </thead>

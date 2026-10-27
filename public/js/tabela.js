@@ -9,7 +9,7 @@ function montarTabela(leads) {
     tabela.innerHTML = '';
 
     if (leads.length === 0) {
-        tabela.innerHTML = '<tr><td colspan="5">Nenhum lead encontrado.</td></tr>';
+        tabela.innerHTML = '<tr><td colspan="6">Nenhum lead encontrado.</td></tr>';
         return;
     }
 
@@ -20,6 +20,12 @@ function montarTabela(leads) {
         linha.appendChild(criarCelula(lead.telefone));
         linha.appendChild(criarCelula(lead.empresa || '-'));
         linha.appendChild(criarCelula(lead.status));
+
+        const nomesDasTags = lead.tags.map(function (tag) {
+            return tag.nome;
+        });
+
+        linha.appendChild(criarCelula(nomesDasTags.join(', ') || '-'));
 
         const celulaAcoes = document.createElement('td');
 
