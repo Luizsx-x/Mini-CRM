@@ -23,6 +23,12 @@ class LeadController extends Controller
             $query->where('status', $request->status);
         }
 
+        if ($request->filled('tag')) {
+            $query->whereHas('tags', function ($consulta) use ($request) {
+                $consulta->where('tags.id', $request->tag);
+            });
+        }
+
         return response()->json($query->latest()->get());
     }
 
@@ -31,9 +37,11 @@ class LeadController extends Controller
      */
     public function store(LeadRequest $request)
     {
-        $lead = Lead::create($request->validated());
+        $lead = Lead::create($request->safe()->except('tags'));
 
-        return response()->json($lead, 201);
+        $lead->tags()->sync($request->input('tags', []));
+
+        return response()->json($lead->load('tags'), 201);
     }
 
     /**
@@ -41,7 +49,7 @@ class LeadController extends Controller
      */
     public function show(Lead $lead)
     {
-        return response()->json($lead);
+        return response()->json($lead->load('tags'));
     }
 
     /**
@@ -49,9 +57,11 @@ class LeadController extends Controller
      */
     public function update(LeadRequest $request, Lead $lead)
     {
-        $lead->update($request->validated());
+        $lead->update($request->safe()->except('tags'));
 
-        return response()->json($lead);
+        $lead->tags()->sync($request->input('tags', []));
+
+        return response()->json($lead->load('tags'));
     }
 
     /**

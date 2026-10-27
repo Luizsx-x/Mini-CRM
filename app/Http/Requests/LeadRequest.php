@@ -11,7 +11,7 @@ class LeadRequest extends FormRequest
     {
         return true;
     }
-    
+
     public function rules(): array
     {
         return [
@@ -23,6 +23,8 @@ class LeadRequest extends FormRequest
                 'Novo', 'Contato Realizado', 'Negociação', 'Fechado', 'Perdido',
             ])],
             'observacao' => 'nullable|string',
+            'tags' => 'nullable|array',
+            'tags.*' => 'integer|exists:tags,id',
         ];
     }
 }

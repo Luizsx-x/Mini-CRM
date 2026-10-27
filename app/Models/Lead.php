@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Lead extends Model
 {
@@ -14,4 +15,11 @@ class Lead extends Model
         'status',
         'observacao',
     ];
+
+    public function tags(): BelongsToMany
+{
+    return $this->belongsToMany(Tag::class);
 }
+}
+
+
